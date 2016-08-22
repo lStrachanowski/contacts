@@ -1,0 +1,537 @@
+<head>
+<link href="https://fonts.googleapis.com/css?family=Lato:400,900i" rel="stylesheet"> 
+  <title>contacts</title>
+</head>
+
+<body>
+
+</body>
+
+<template name="maintemplate">
+  {{> yield "topnavbar"}}
+  {{> yield "main"}}
+  {{# if currentUser}}
+  {{> yield "contacts"}}
+  {{/if}}
+</template>
+
+
+<template name="mainContent">
+    <div class="centretemplate">
+ 
+  {{#if currentUser}}
+    {{#if currentUser.emails.[0].verified}}
+      {{> dashboard}}
+      {{else}}
+      <p class="alert alert-warning">You need to verify your email address before using Contacts. <a href="#" class="resend-verification-link">Resend verification link</a>.</p>
+
+    {{/if}}
+   {{else}}
+           {{> login}}
+          <br>
+            <a href="/createaccount" name="createAccount" class="links">create account</a>
+          <br>
+          <a href="/forgotpassword" name="resetPassword" class="links">forgot your password?</a>
+
+   {{/if}}   
+
+  </div>
+</template>
+
+
+<template name="veryfiescreen">
+ <div class="centretemplate">
+  <br>
+  <h1 class="linksBye">Check your email to verify your account</h1> 
+  <h3><a href="/">Log in again</a></h3>
+  </div>
+</template>
+
+
+
+<template name="topNavbar">
+    <nav class="topnavbar">
+    <div class="logo">
+      Contacts
+    </div>
+    {{#unless currentUser.emails.[0].verified}}
+    {{else}}
+      <div class="loginstyle">
+      {{currentUser.username}}
+      {{# if currentUser }}
+
+     &nbsp;<span class="glyphicon glyphicon-cog js-settings"></span>
+
+       &nbsp;<span class="glyphicon glyphicon-off logout"></span>
+
+       
+     {{/ if}} 
+    </div>
+    {{/unless}}
+  </nav>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="settings">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Settings</h4>
+      </div>
+      <div class="modal-body">
+
+        
+          <form>
+
+           <div class="col-lg-12">
+            <h2 class="form-control-static lablecolor">
+                  Change email
+            </h2>
+          </div>
+
+
+          <div class="col-lg-6">
+            <p class="form-control-static lablecolor">
+                  New Email
+            </p>
+          <input type="email" name="new-email" class="col-lg-6 form-control" id="new-email"/>
+          </div>
+          
+          <div class="col-lg-6">
+            <p class="form-control-static lablecolor">
+                  Confirm Email
+            </p>
+          <input type="email" name="new-email" class="col-lg-6 form-control" id="confirm-email"/>
+          </div>
+
+            <div class="col-lg-12">
+            <p class="form-control-static lablecolor">
+                  Enter current email
+            </p>
+          <input type="email" name="old-email" class="col-lg-12 form-control" id="old-email"/>
+          </div>
+
+          <div class="col-lg-12">
+            <button type="button" class="btn btn-default pull-right btn-primary js-change-email" >Change</button>
+          </div>
+          
+          <div style="clear: both;"></div>
+
+
+           <div class="col-lg-12">
+            <h2 class="form-control-static lablecolor">
+                  Change password
+            </h2>
+          </div>
+
+           <div class="col-lg-12">
+            <p class="form-control-static lablecolor">
+                  Current password:
+            </p>
+          <input type="password" name="currentpassword" class="col-lg-6 form-control" id="current-password"/>
+          </div>
+
+          <div class="col-lg-12">
+            <p class="form-control-static lablecolor">
+                  New password:
+            </p>
+          <input type="password" name="new-password" class="col-lg-6 form-control" id="new-password"/>
+          </div>
+
+          <div class="col-lg-12">
+            <p class="form-control-static lablecolor">
+                  Confirm new password:
+            </p>
+          <input type="password" name="confirm-new-password" class="col-lg-6 form-control" id="confirm-new-password"/>
+          </div>
+
+
+          <div class="col-lg-12">
+            <button type="button" class="btn btn-default pull-right btn-primary js-change-pass" >Change</button>
+          </div>
+
+          <div style="clear: both;"></div>
+
+        </form>
+
+      </div>
+      <br>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+</template>
+
+<template name="forgotpassword" >
+ <div class="centretemplate">
+<br>
+  <h1 class="linksBye">Reset password </h1>
+  <br>
+  <form>
+    <p class="links alingleft">Enter your email:</p>
+    <input type="email" name="resetEmail" placeholder="email"
+    class="inputtext"><br>
+    <input type="submit" value="Reset" class="formButton">
+  </form>
+  </div>
+</template>
+
+
+<template name="register" >
+ <div class="centretemplate">
+<br>
+  <h1 class="linksBye">Create new account </h1>
+  <form>
+    <p class="links alingleft">User name:</p>
+    <input type="text" name="userName" placeholder="User name"
+    class="inputtext">
+    <p class="links alingleft">Email:</p>
+    <input type="email" name="registerEmail" placeholder="email"
+    class="inputtext">
+    <p class="links alingleft">Password:</p>
+    <input type="password" name="registerPassword" placeholder="password" 
+    class="inputtext"><br>
+    <input type="submit" value="Create" class="formButton">
+  </form>
+  </div>
+</template>
+
+
+
+<template name="login">
+    <form>
+    <h4 class="links alingleft">Email:</h4>
+      <input type="email" name="loginEmail" placeholder="email"
+    class="inputtext"><br>
+    <p class="links alingleft">Password:</p>
+    <input type="password" name="loginPassword" placeholder="password" 
+    class="inputtext"><br>
+    <input type="submit" value="Login" class="formButton">
+  </form>
+</template>
+
+
+
+<template name="dashboard">
+    <div class="centretemplate">
+    <div class="addcircle js-add-contact">+</div>
+     <input type="text" name="search" id="search" placeholder=" type to search"
+    class="inputsearch float ">
+    </div>
+
+          <div class="modal fade" tabindex="-1" role="dialog" id="addform">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Add contact</h4>
+            </div>
+            
+            <div class="modal-body col-lg-12">
+            
+                <form>
+               
+                <div class="col-lg-6">
+                <p class="form-control-static lablecolor">First name:</p>
+                <input type="text" name="firstname" class="form-control" id="firstname">
+                </div>
+          
+                <div class="col-lg-6">
+                <p class="form-control-static lablecolor">Last name:</p>
+                <input type="text" name="lastname" 
+                id ="lastname" class="form-control">
+                </div>
+            
+
+                <div class="col-lg-12">
+                <p class="form-control-static lablecolor">Company:</p>
+                <input type="text" name="company" class="form-control" id="company">
+                </div>
+                
+                <div class="col-lg-12">
+                <p class="form-control-static lablecolor">Address:</p>
+                <input type="text" name="address" class="form-control" id="address">
+                </div>
+
+                <div class="col-lg-4">
+                <p class="form-control-static lablecolor">Phone:</p>
+                <input type="tel" name="phone" class="form-control" id="phone">
+                </div>
+
+                <div class="col-lg-4">
+                <p class="form-control-static lablecolor">Mobile:</p>
+                <input type="tel" name="mobile" class="form-control" id="mobile">
+                </div>
+
+                <div class="col-lg-4">
+                <p class="form-control-static lablecolor">Fax:</p>
+                <input type="tel" name="fax" class="form-control" id="fax">
+                </div>
+
+                <div class="col-lg-12">
+                <p class="form-control-static lablecolor">Email:</p>
+                <input type="email" name="email" class="form-control" id="email">
+                </div>
+
+                <div class="col-lg-12">
+                <p class="form-control-static lablecolor">Others:</p>
+                <textarea name="others" class="form-control col-lg-12" rows="2" id="others">
+                </textarea>
+                </div>
+
+                <div class="col-lg-12">
+                <p class="form-control-static lablecolor">Comments:</p>
+                <textarea name="comments" class="form-control col-lg-12" rows="3" id="comments">
+                </textarea>  
+                </div>
+
+              </form>
+
+            </div>
+
+            <div class="modal-footer">
+             <div>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary js-add-contact-click">Save</button>
+              </div>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+</template>
+
+
+
+<template name="contactItem" > 
+  {{#each contactsList}}
+      <div class="contactitem" id="{{_id}}">
+     <span class="ratefont">{{rating}} &nbsp;</span> {{firstname}} {{lastname}} 
+   
+        <div class="starposition">
+
+          <div class="btn-toolbar" role="toolbar" aria-label="rating">
+            <div class="btn-group" role="group" aria-label="up"><span class="glyphicon glyphicon-arrow-up "></span></div>
+            <div class="btn-group" role="group" aria-label="down"><span class="glyphicon glyphicon-arrow-down "></span></div>
+          </div>
+        </div> 
+
+     </div>
+{{/each}}
+
+</template>
+
+
+
+<template name="contactItemDetails" >
+      <div class="alignright">
+        <img src="/images/close.jpg" class="contactItemControls" id="close" />
+        <img src="/images/edit.jpg" class="contactItemControls" id="edit"/>
+      </div>
+      <div class="contactitem" >
+        <span class="ratefont">{{rating}} &nbsp;</span>  {{firstname}} {{lastname}}
+        </div> 
+      <br>
+      <div class="contactItemDetailsBox">
+        <div class="contactItemPosition">
+          <div class="contactItemDetailsLabel">
+            First name
+          </div>
+           <div class="contactItemNameInput">
+            {{firstname}}
+          </div>
+        </div>
+        <div class="contactItemPosition">
+          <div class="contactItemDetailsLabel">
+            Last name
+          </div>
+          <div class="contactItemNameInput">
+            {{lastname}}
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+        <div class="contactItemPosition">
+          <div class="contactItemDetailsLabel">
+            Company
+          </div>
+           <div class="contactItemOtherInput">
+            {{company}}
+          </div>
+        </div>
+        <div class="contactItemPosition">
+          <div class="contactItemDetailsLabel">
+            Company address
+          </div>
+          <div class="contactItemOtherInput">
+            {{address}}
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+       <div class="contactItemPositionFourinrow">
+          <div class="contactItemDetailsLabel">
+            Telephone
+          </div>
+           <div class="contactItemOtherInput">
+             {{phone}}
+          </div>
+        </div>
+        <div class="contactItemPositionFourinrow">
+          <div class="contactItemDetailsLabel">
+            Mobile
+          </div>
+          <div class="contactItemOtherInput">
+            {{mobile}}
+          </div>
+        </div>
+        <div class="contactItemPositionFourinrow">
+          <div class="contactItemDetailsLabel">
+            Fax
+          </div>
+           <div class="contactItemOtherInput">
+             {{fax}}
+          </div>
+        </div>
+        <div class="contactItemPositionFourinrow">
+          <div class="contactItemDetailsLabel">
+            Email
+          </div>
+          <div class="contactItemOtherInput">
+             {{email}}
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+        <div class="contactItemPositionOneinrow">
+          <div class="contactItemDetailsLabel">
+            Other
+          </div>
+           <div class="contactItemOtherInput">
+            {{others}}
+          </div>
+        </div>
+        <div class="contactItemPositionOneinrow">
+          <div class="contactItemDetailsLabel">
+          Comments
+          </div>
+           <div class="contactItemOtherInput">
+             {{comments}}
+          </div>
+        </div>
+        <br>
+      </div>
+      <div class="alignright">
+        <img src="/images/delete.jpg" class="contactItemControls" id="delete" />
+      </div>
+</template>
+
+
+<template name="contactItemEditDetails">
+    <div class="editmargin">
+      
+    
+      <div class="contactitem" >
+        {{firstname}} {{lastname}}
+      </div>
+
+      <br>
+
+      <div class="contactItemDetailsBox">
+        <div class="contactItemPosition">
+          <div class="contactItemDetailsLabel">
+            First name
+          </div>
+           <div>
+            <input type="text" name="firstName" class="form-control col-lg-4" id="firstname" value="{{firstname}}">
+          </div>
+        </div>
+        <div class="contactItemPosition">
+          <div class="contactItemDetailsLabel">
+            Last name
+          </div>
+          <div>
+            <input type="text" name="lastName" class="form-control col-lg-4" id="lastname" value="{{lastname}}"> 
+          </div>
+        </div>
+
+
+        <div style="clear: both;"></div>
+        <div class="contactItemPosition">
+          <div class="contactItemDetailsLabel">
+            Company
+          </div>
+           <div>
+            <input type="text" name="company" class="form-control col-lg-6" id="company" value="{{company}}">
+          </div>
+        </div>
+        <div class="contactItemPosition">
+          <div class="contactItemDetailsLabel">
+            Company address
+          </div>
+          <div>
+            <input type="text" name="address" class="form-control col-lg-6" id="address" value="{{address}}">
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+       <div class="contactItemPositionFourinrow">
+          <div class="contactItemDetailsLabel">
+            Telephone
+          </div>
+           <div>
+             <input type="tel" name="telephone" class="form-control col-lg-3" id="phone" value="{{phone}}">
+          </div>
+        </div>
+        <div class="contactItemPositionFourinrow">
+          <div class="contactItemDetailsLabel">
+            Mobile
+          </div>
+          <div>
+           <input type="tel" name="mobile" class="form-control col-lg-3" id="mobile" value="{{mobile}}">
+          </div>
+        </div>
+        <div class="contactItemPositionFourinrow">
+          <div class="contactItemDetailsLabel" >
+            Fax
+          </div>
+           <div>
+             <input type="tel" name="fax" class="form-control col-lg-3"  id="fax" value="{{fax}}">
+          </div>
+        </div>
+        <div class="contactItemPositionFourinrow">
+          <div class="contactItemDetailsLabel">
+            Email
+          </div>
+          <div>
+             <input type="email" name="email" class="form-control col-lg-3" id="email" value="{{email}}">
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+        <div class="contactItemPositionOneinrow">
+          <div class="contactItemDetailsLabel">
+            Other
+          </div>
+           <div>
+                <textarea name="others" class="form-control col-lg-12" id="others" rows="2" >{{others}}
+          </textarea>
+          </div>
+        </div>
+        <div class="contactItemPositionOneinrow">
+          <div class="contactItemDetailsLabel">
+          Comments
+          </div>
+           <div>
+              <textarea name="comments" class="form-control col-lg-12" id="comments" rows="2" >{{comments}}
+          </textarea>
+          </div>
+        </div>
+        <br>
+      </div>
+
+      <div class="centrebutton">
+      <input type="submit" value="cancel" class="formButton" id="cancel">
+      <input type="submit" value="save" class="formButton" id="save">
+      </div>
+   </div>   
+</template>
+
+
