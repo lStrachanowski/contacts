@@ -13,8 +13,7 @@ body{
 }
 .topnavbar{
 	background-color: rgb(128, 181, 189); 
-	height: 125px;
-
+	height: 7em;
 }
 .logo{
 	font-family: 'Lato';
@@ -106,7 +105,7 @@ body{
 .loginstyle{
 	float: right;
 	font-family: Arial Black,Arial Bold,Gadget,sans-serif;
-	font-size: 24px;
+	font-size: 1.5em;
 	color:white;
 	font-weight: bold;
  	position: relative;
@@ -236,3 +235,21 @@ body{
 }
 
 
+@media only screen and (max-width: 768px) {
+	.logo{
+		float: none;
+		margin-bottom: 1%;
+		font-size: 3.0em;
+	}
+	.loginstyle{
+		top: 0%;
+		display: block;
+		margin-left: 0%;
+		margin-bottom: 2%;
+		transform: none;
+		font-size: 1.25em;
+	}
+	.glyphicon{
+		font-size: 1.25em;
+	}
+}
