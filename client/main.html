@@ -310,18 +310,14 @@
 
 <template name="contactItem" > 
   {{#each contactsList}}
-      <div class="contactitem" id="{{_id}}">
-     <span class="ratefont">{{rating}} &nbsp;</span> {{firstname}} {{lastname}} 
-   
-        <div class="starposition">
-
-          <div class="btn-toolbar" role="toolbar" aria-label="rating">
-            <div class="btn-group" role="group" aria-label="up"><span class="glyphicon glyphicon-arrow-up "></span></div>
-            <div class="btn-group" role="group" aria-label="down"><span class="glyphicon glyphicon-arrow-down "></span></div>
-          </div>
-        </div> 
+    <div class="contactitem" id="{{_id}}">
+     <div class="ratefont">{{rating}} </div> {{firstname}} {{lastname}} 
+      <div class="starposition ">
+            <div class="btn-group" role="group" aria-label="up"><div class="glyphicon glyphicon-arrow-up "></div></div>
+            <div class="btn-group" role="group" aria-label="down"><div class="glyphicon glyphicon-arrow-down "></div></div>
 
      </div>
+     </div> 
 {{/each}}
 
 </template>

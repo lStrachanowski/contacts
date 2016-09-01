@@ -53,7 +53,7 @@ body{
 }
 
 .glyphicon {
-    font-size: 25px;
+    font-size: 4vh;
     margin: 2px;
     cursor:pointer;
 }
@@ -140,10 +140,10 @@ body{
 }
 .contactitem{
 	font-family: Arial Black,Arial Bold,Gadget,sans-serif;
-	font-size: 40px;
+	font-size: 4vh;
 	padding: 1% 0% 1% 2%;
 	font-weight: bold;
-	width: 60%;
+	width: 75%;
 	margin: 0 auto;
 	margin-top: 1%;
 	color: white;
@@ -152,6 +152,8 @@ body{
     -webkit-box-shadow: 0px 4px 6px #999999;
     box-shadow: 0px 4px 6px #999999;
     cursor:pointer;
+    word-wrap: break-word;
+    overflow: hidden;
 
 }
 .contactItemDetailsBox{
@@ -232,6 +234,8 @@ body{
 }
 .ratefont{
 	color: rgb(153, 185, 105); 
+	float: left;
+	margin-right: 2%;
 }
 
 
@@ -270,14 +274,39 @@ body{
 		display: block;
 		font-size: 2.0em;
 		width: 60%;
-	
+
 	}
 
 	.centretemplate{
 		display: inline-flex;
 	}
+	.contactitem{
+		font-size: 4.0vh;
+		padding: 1% 0% 1% 2%;
+		width: 90%;
+		margin-top: 2%;
+
+	}
+
+	.glyphicon-arrow-down{
+		font-size: 0.8em;
+	}
+	.glyphicon-arrow-up{
+		font-size: 0.8em;
+	}
+	.glyphicon {
+    font-size: 0.8em;
+    margin: 1px;
+    cursor:pointer;
+	}
+
+	.starposition{
+ 	padding: 1% 1% 1% 0%;
+ 	display: inline-table;
+	}
+	
 	::-webkit-input-placeholder { font-size: 0.80em; }
-::-moz-placeholder { font-size: 0.80em; } 
-:-ms-input-placeholder { font-size: 0.80em; }
-input:-moz-placeholder { font-size: 0.80em; }
+	::-moz-placeholder { font-size: 0.80em; } 
+	:-ms-input-placeholder { font-size: 0.80em; }
+	input:-moz-placeholder { font-size: 0.80em; }
 }
