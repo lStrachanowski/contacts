@@ -89,7 +89,7 @@ Template.contactItem.helpers({
 				return Contacts.find({creatorid:checkId},{sort:{rating:-1}});
 			}else{
 			var regex = new RegExp(Session.get('key'),'i');
-				return Contacts.find({$or:[{firstname:regex}, {lastname:regex}]});
+				return Contacts.find({$and:[{ creatorid:checkId }, {$or:[{firstname:regex}, {lastname:regex}]}]});
 			}
 		}
 });
