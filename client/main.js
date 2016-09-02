@@ -208,6 +208,7 @@ Template.topNavbar.events({
     	var click = confirm("Do you want to logout?");
     	if(click == true){
     	event.preventDefault();
+    	Session.set('key', '');
         Meteor.logout();
         Router.go('/');
         Meteor._reload.reload();
