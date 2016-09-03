@@ -225,7 +225,7 @@ body{
 .alignright{
 	text-align: right;
 	padding: 1% 0% 1% 2%;
-    width: 80%;
+    width: 87%;
 }
 
 .linksBye{
@@ -268,7 +268,6 @@ body{
 		top: 0%;
 		display: block;
 		margin-left: 0%;
-		margin-bottom: 2%;
 		transform: none;
 		font-size: 1.25em;
 	}
@@ -342,7 +341,10 @@ body{
 	margin-bottom: 1%;
 }
 
-
+.contactItemControls{
+	max-width: 12%;
+	max-height: 12%;
+}
 	::-webkit-input-placeholder { font-size: 0.80em; }
 	::-moz-placeholder { font-size: 0.80em; } 
 	:-ms-input-placeholder { font-size: 0.80em; }
