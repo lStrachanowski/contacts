@@ -330,6 +330,16 @@ Template.contactItemEditDetails.events({
 	}
 });
 
+Meteor.call('countUsers', function(error, result){
+    Session.set('countUsersResult', result);
+});
+
+Template.adminlog.helpers({
+	getContactCount:function(){
+
+		return "Number of contacts in database: "  + Session.get('countUsersResult');
+	}
+});
 
 Template.contactItemEditDetails.events({
 	'click #cancel':function(event){
