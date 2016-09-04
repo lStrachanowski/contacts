@@ -537,7 +537,44 @@
 <template name="adminlog">
  {{#if currentUser}}
   {{#if isInRole 'admin'}}
-  {{getContactCount}}
+  <div class="centreadmintemplate">
+     <input type="text" name="search" id="search" placeholder=" type to search"
+    class="inputsearchadmin"> 
+      <div class="centreadmintemplate">
+          {{getContactCount}} &nbsp; &nbsp;
+          {{getAccountCount}}
+      </div>
+  </div>
+  <br>
+  <div class="container">
+    <table class="table table-bordered table-hover table-responsive">
+    <thead>
+      <th>User name</th>
+      <th>Email</th>
+      <th>User ID</th>
+      <th>Status</th>
+      <th>Options</th>
+    </thead>
+    <tbody>
+      <tr>
+          <td>Strachula</td>
+          <td>s@s.pl</td>
+          <td>s4d54e84f8ef4efef515</td>
+          <td>Verified</td>
+          <td><button type="button" class="btn btn-danger">Delete</button></td>
+        </tr>
+           <tr>
+          <td>Strachula</td>
+          <td>s@s.pl</td>
+          <td>s4d54e84f8ef4efef515</td>
+          <td>Verified</td>
+          <td><button type="button" class="btn btn-danger">Delete</button></td>
+        </tr>
+
+    </tbody>
+        
+    </table>
+  </div>
   {{else}}
   <h3>Access denied</h3>
   {{/if}}

@@ -20,6 +20,10 @@ Meteor.methods({
   'countUsers':function(){
     var count = Contacts.find().count();
     return count;
+  },
+  'countAccounts':function(){
+    var count = Meteor.users.find().count();
+    return count;
   }
 });
 

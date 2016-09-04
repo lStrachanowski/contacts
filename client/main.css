@@ -53,6 +53,11 @@ body{
   margin-top: 7%
 }
 
+.centreadmintemplate{
+  width: 100%;
+  text-align: center;
+}
+
 .glyphicon {
     font-size: 4vh;
     margin: 2px;
@@ -80,6 +85,13 @@ body{
 	width: 45%;
 	margin: 5px;
 	margin-right: 15%;
+	border: 1px solid #E0E0E0;
+}
+.inputsearchadmin{
+	clear: both;
+	font-size: 3.0em;
+	width: 80%;
+	margin: 2% ;
 	border: 1px solid #E0E0E0;
 }
 .formButton{
@@ -241,6 +253,9 @@ body{
 	margin-right: 2%;
 }
 
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}
 
 @media only screen and (max-width: 768px) {
 	body{
@@ -286,14 +301,6 @@ body{
 		margin-left: 10%;
 	}
 
-	.inputsearch{
-		top: 50%;
-		margin: 2px;
-		display: block;
-		font-size: 2.0em;
-		width: 60%;
-
-	}
 
 	.centretemplate{
 		display: inline-block;

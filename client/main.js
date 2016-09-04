@@ -334,11 +334,20 @@ Meteor.call('countUsers', function(error, result){
     Session.set('countUsersResult', result);
 });
 
+Meteor.call('countAccounts', function(error, result){
+    Session.set('countAccountsResult', result);
+});
+
 Template.adminlog.helpers({
 	getContactCount:function(){
-
-		return "Number of contacts in database: "  + Session.get('countUsersResult');
+		return "Total number of contacts in database: "  
+		+ Session.get('countUsersResult');
+	},
+	getAccountCount:function(){
+		return "Number of accounts: "  
+		+ Session.get('countAccountsResult');
 	}
+
 });
 
 Template.contactItemEditDetails.events({
