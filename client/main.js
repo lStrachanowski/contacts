@@ -21,6 +21,12 @@ Router.route('/', function(){
 	
 });
 
+Router.route('/adminlog', function(){
+	this.render('topNavbar', {to:"topnavbar"});
+	this.render('adminlog', {to:"main"});
+});
+
+
 Router.route('/veryfiescreen', function(){
 	this.render('topNavbar', {to:"topnavbar"});
 	this.render('veryfiescreen', {to:"main"});
