@@ -72,6 +72,9 @@ Meteor.autorun(function(event){
 	}
 });
 
+Meteor.subscribe('allEmails');
+Meteor.subscribe('contacts');
+
 Template.mainContent.events({
 	'keyup #search': function(event) {
 		Session.set('key', event.target.value);
@@ -338,6 +341,12 @@ Meteor.call('countAccounts', function(error, result){
     Session.set('countAccountsResult', result);
 });
 
+Meteor.call('userName', function(error, result){
+    Session.set('uName', result);
+});
+
+
+
 Template.adminlog.helpers({
 	getContactCount:function(){
 		return "Total number of contacts in database: "  
@@ -346,8 +355,20 @@ Template.adminlog.helpers({
 	getAccountCount:function(){
 		return "Number of accounts: "  
 		+ Session.get('countAccountsResult');
-	}
-
+	},
+	contactsUsers:function(){
+		return Meteor.users.find();
+	},
+	userEmail: function(){
+    return this.emails[0].address;
+    },
+    userEmailVerified:function(){
+    	if(this.emails[0].verified){
+    		return true;
+    	}else{
+    		return false;
+    	}
+   }
 });
 
 Template.contactItemEditDetails.events({

@@ -552,27 +552,22 @@
       <th>User name</th>
       <th>Email</th>
       <th>User ID</th>
-      <th>Status</th>
+      <th>Created at</th>
+      <th>Verified</th>
       <th>Options</th>
     </thead>
-    <tbody>
-      <tr>
-          <td>Strachula</td>
-          <td>s@s.pl</td>
-          <td>s4d54e84f8ef4efef515</td>
-          <td>Verified</td>
-          <td><button type="button" class="btn btn-danger">Delete</button></td>
-        </tr>
-           <tr>
-          <td>Strachula</td>
-          <td>s@s.pl</td>
-          <td>s4d54e84f8ef4efef515</td>
-          <td>Verified</td>
-          <td><button type="button" class="btn btn-danger">Delete</button></td>
-        </tr>
-
-    </tbody>
-        
+      {{#each contactsUsers}}
+        <tbody>
+          <tr>
+              <td>{{username}}</td>
+              <td>{{userEmail}}</td>
+              <td>{{_id}}</td>
+              <td>{{createdAt}}</td>
+              <td>{{userEmailVerified}}</td>
+              <td><button type="button" class="btn btn-danger">Delete</button></td>
+          </tr>
+        </tbody>
+      {{/each}} 
     </table>
   </div>
   {{else}}

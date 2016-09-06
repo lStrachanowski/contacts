@@ -6,6 +6,14 @@ process.env.MAIL_URL = "smtp://postmaster%40sandbox6bc3fa5e9e7547afb9e268a53e4da
 */
 });
 
+Meteor.publish('allEmails',function(){
+  return  Meteor.users.find();
+});
+
+  Meteor.publish('contacts', function tasksPublication() {
+    return Contacts.find();
+  });
+
 Meteor.methods({
   sendVerificationLink() {
     let userId = Meteor.userId();
