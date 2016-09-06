@@ -558,13 +558,13 @@
     </thead>
       {{#each contactsUsers}}
         <tbody>
-          <tr>
+          <tr >
               <td>{{username}}</td>
               <td>{{userEmail}}</td>
               <td>{{_id}}</td>
               <td>{{createdAt}}</td>
               <td>{{userEmailVerified}}</td>
-              <td><button type="button" class="btn btn-danger">Delete</button></td>
+              <td><button type="button" class="btn btn-danger js-delete" id="{{_id}}">Delete</button></td>
           </tr>
         </tbody>
       {{/each}} 

@@ -32,6 +32,9 @@ Meteor.methods({
   'countAccounts':function(){
     var count = Meteor.users.find().count();
     return count;
+  },
+  'deleteAccount':function(accountid){
+    Meteor.users.remove({_id:accountid});
   }
 });
 

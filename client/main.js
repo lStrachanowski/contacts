@@ -371,6 +371,16 @@ Template.adminlog.helpers({
    }
 });
 
+Template.adminlog.events({
+	'click .js-delete':function(){
+		var p =  this._id;
+		var click = confirm("Do you want to delete this account ?");
+		if (click == true){
+			Meteor.call('deleteAccount', p);
+		}
+	}
+});
+
 Template.contactItemEditDetails.events({
 	'click #cancel':function(event){
 		Router.go('/'+currentId);
