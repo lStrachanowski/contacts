@@ -376,7 +376,13 @@ Template.adminlog.events({
 		var p =  this._id;
 		var click = confirm("Do you want to delete this account ?");
 		if (click == true){
-			Meteor.call('deleteAccount', p);
+			Meteor.call('deleteAccount', p, function(error){
+				if (error){
+    				Bert.alert( event.reason, 'danger' );
+    			}else{
+    				Bert.alert( 'Account deleted', 'success' );
+    			}
+			});
 		}
 	}
 });
