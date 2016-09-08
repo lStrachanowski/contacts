@@ -357,7 +357,16 @@ Template.adminlog.helpers({
 		+ Session.get('countAccountsResult');
 	},
 	contactsUsers:function(){
-		return Meteor.users.find();
+		if (Session.get("userSort")){	
+			return Meteor.users.find({},{sort: {username:1}});	
+		}else if( Session.get("userIdSort")){
+			return Meteor.users.find({},{sort: {_id:1}});	
+		}else if(Session.get("userTimeSort")){
+			return Meteor.users.find({},{sort: {createdAt :-1}});	
+		}
+		else{
+			return Meteor.users.find();
+		}
 	},
 	userEmail: function(){
     return this.emails[0].address;
@@ -384,6 +393,26 @@ Template.adminlog.events({
     			}
 			});
 		}
+	},
+	'click .js-user-sort':function(){
+		Session.set("userSort", true);
+		Session.set("userIdSort", undefined);
+		Session.set("userTimeSort", undefined);
+	},
+	'click .js-user-sort-del':function(){
+		Session.set("userSort", undefined);
+		Session.set("userIdSort", undefined);
+		Session.set("userTimeSort", undefined);
+	},
+	'click .js-id-sort':function(){
+		Session.set("userSort", undefined);
+		Session.set("userIdSort", true);
+		Session.set("userTimeSort", undefined);
+	},
+	'click .js-time-sort':function(){
+		Session.set("userSort", undefined);
+		Session.set("userIdSort", undefined);
+		Session.set("userTimeSort", true);
 	}
 });
 

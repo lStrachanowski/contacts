@@ -535,6 +535,7 @@
 
 
 <template name="adminlog">
+
  {{#if currentUser}}
   {{#if isInRole 'admin'}}
   <div class="centreadmintemplate">
@@ -546,13 +547,15 @@
       </div>
   </div>
   <br>
+
   <div class="container">
+    <a href="#" class="js-user-sort-del">Remove sort</a>
     <table class="table table-bordered table-hover table-responsive">
     <thead>
-      <th>User name</th>
+      <th><a href="#" class="js-user-sort">User name</a></th>
       <th>Email</th>
-      <th>User ID</th>
-      <th>Created at</th>
+      <th><a href class="js-id-sort">User ID</a></th>
+      <th><a href="#" class="js-time-sort">Created at</a></th>
       <th>Verified</th>
       <th>Options</th>
     </thead>
