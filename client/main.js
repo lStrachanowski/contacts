@@ -79,6 +79,10 @@ Template.mainContent.events({
 	'keyup #search': function(event) {
 		Session.set('key', event.target.value);
 	},
+	'click .logout':function(){
+		Meteor.logout();
+		Meteor._reload.reload();
+	},
 	'click .resend-verification-link' ( event, template ) {
     Meteor.call( 'sendVerificationLink', ( error, response ) => {
       if ( error ) {
@@ -108,7 +112,8 @@ Template.contactItem.events({
 		'click .contactitem': function(events){
 			if(events.target.id == this._id){
 			currentId = this._id;
-			Router.go("/"+this._id);	
+			Router.go("/"+this._id);
+			Session.set('key',undefined);	
 		}
 		},
 		'click .glyphicon-arrow-up':function(events){
