@@ -59,7 +59,7 @@ body{
 }
 
 .glyphicon {
-    font-size: 4vh;
+    font-size: 1.15em;
     margin: 2px;
     cursor:pointer;
 }
@@ -156,7 +156,7 @@ body{
 	font-size: 4vh;
 	padding: 1% 0% 1% 2%;
 	font-weight: bold;
-	width: 75%;
+	width: 68%;
 	margin: 0 auto;
 	margin-top: 1%;
 	color: white;
@@ -170,7 +170,7 @@ body{
 
 }
 .contactItemDetailsBox{
-	width: 75%;
+	width: 68%;
 	background-color: rgb(235,235,235);
 	margin: 0 auto;
 	overflow: hidden;
@@ -182,7 +182,7 @@ body{
 }
 .starposition{
  	float: right;
- 	padding: 1% 2% 1% 0%;
+ 	padding-right: 2%;
  	margin: 0 auto;
 }
 
@@ -238,7 +238,7 @@ body{
 .alignright{
 	text-align: right;
 	padding: 1% 0% 1% 2%;
-    width: 87%;
+    width: 85%;
 }
 
 .linksBye{
@@ -252,6 +252,9 @@ body{
 	color: rgb(153, 185, 105); 
 	float: left;
 	margin-right: 2%;
+}
+.clear{
+	clear: both;
 }
 
 @-moz-document url-prefix() {
@@ -340,7 +343,7 @@ body{
 	}
 
 	.starposition{
- 	padding: 1% 1% 1% 0%;
+	padding-right: 1%;
  	display: inline-table;
 	}
 	
