@@ -65,12 +65,9 @@ Router.route('/:_id/edit', function(){
 });
 });
 
-Meteor.autorun(function(event){
-	if( Meteor.user() ){
-		var cliked = Meteor.user().profile.showarrows;
-		$('body').css('background', '#FFFFFF');
-		$('body').css('background-image','none');	
-			if(cliked == true){
+Meteor.methods({
+    'arrowsOperation': function(value){
+        if(value == true){
 				$('#check').prop('checked', true);
 				$('.glyphicon-arrow-up').show();
 				$('.glyphicon-arrow-down').show();
@@ -79,8 +76,24 @@ Meteor.autorun(function(event){
 				$('.glyphicon-arrow-down').hide();
 				$('.glyphicon-arrow-up').hide();
 			}
+    }
+});
+
+Template.contactItem.onRendered(function () {
+	if( Meteor.user() ){
+		var cliked = Meteor.user().profile.showarrows;
+			Meteor.call('arrowsOperation', cliked);
 		}
-	});
+});
+
+Meteor.autorun(function(event){
+	if( Meteor.user() ){
+		var cliked = Meteor.user().profile.showarrows;
+		$('body').css('background', '#FFFFFF');
+		$('body').css('background-image','none');	
+			Meteor.call('arrowsOperation', cliked);
+		}
+});
 
 Meteor.subscribe('allEmails');
 Meteor.subscribe('contacts');
