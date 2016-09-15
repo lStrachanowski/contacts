@@ -84,6 +84,15 @@
 
         
           <form>
+          <div class="col-lg-12">
+            <h2 class="form-control-static lablecolor">
+                  Show arrows
+            </h2>
+             <div class="col-lg-12">
+             <input type="checkbox" name="arrow" class="arrowcheck" id="check" > Show arrows<br>
+          </div>
+
+          </div>
 
            <div class="col-lg-12">
             <h2 class="form-control-static lablecolor">
@@ -314,10 +323,10 @@
     <div class="contactitem" id="{{_id}}">
      <div class="ratefont">{{rating}} </div> {{firstname}} {{lastname}} 
       <div class="starposition ">
-            <div class="btn-group" role="group" aria-label="up"><div class="glyphicon glyphicon-arrow-up "></div></div>
-            <div class="btn-group" role="group" aria-label="down"><div class="glyphicon glyphicon-arrow-down "></div></div>
-
+            <div class="btn-group" role="group" aria-label="up"><div class="glyphicon glyphicon-arrow-up " id="arrowup"></div></div>
+            <div class="btn-group" role="group" aria-label="down"><div class="glyphicon glyphicon-arrow-down " id="arrowdown"></div></div>
      </div>
+
      </div> 
 {{/each}}
 

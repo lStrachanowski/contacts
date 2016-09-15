@@ -67,10 +67,20 @@ Router.route('/:_id/edit', function(){
 
 Meteor.autorun(function(event){
 	if( Meteor.user() ){
-	$('body').css('background', '#FFFFFF');
-	$('body').css('background-image','none');	
-	}
-});
+		var cliked = Meteor.user().profile.showarrows;
+		$('body').css('background', '#FFFFFF');
+		$('body').css('background-image','none');	
+			if(cliked == true){
+				$('#check').prop('checked', true);
+				$('.glyphicon-arrow-up').show();
+				$('.glyphicon-arrow-down').show();
+			}else{
+				$('#check').prop('checked', false);
+				$('.glyphicon-arrow-down').hide();
+				$('.glyphicon-arrow-up').hide();
+			}
+		}
+	});
 
 Meteor.subscribe('allEmails');
 Meteor.subscribe('contacts');
@@ -95,6 +105,8 @@ Template.mainContent.events({
 }
 });
 
+
+
 Template.contactItem.helpers({
 		contactsList:function(){
 			var checkId = Meteor.user()._id;
@@ -104,8 +116,10 @@ Template.contactItem.helpers({
 			var regex = new RegExp(Session.get('key'),'i');
 				return Contacts.find({$and:[{ creatorid:checkId }, {$or:[{firstname:regex}, {lastname:regex}]}]});
 			}
+
 		}
 });
+
 
 
 Template.contactItem.events({
@@ -113,7 +127,7 @@ Template.contactItem.events({
 			if(events.target.id == this._id){
 			currentId = this._id;
 			Router.go("/"+this._id);
-			Session.set('key',undefined);	
+			Session.set('key',undefined);
 		}
 		},
 		'click .glyphicon-arrow-up':function(events){
@@ -122,7 +136,7 @@ Template.contactItem.events({
 			var count = currentRating.rating + 1;
 			Contacts.update({_id:elementId},{$set:{rating:count}});
 		},
-				'click .glyphicon-arrow-down':function(events){
+		'click .glyphicon-a rrow-down':function(events){
 			var elementId = this._id;
 			var currentRating = Contacts.findOne({_id:elementId});
 			var count = currentRating.rating - 1;
@@ -159,7 +173,10 @@ Template.register.events({
 		var passwordVar = event.target.registerPassword.value;
 		
 		Accounts.createUser(
-			{username:userName, email:emailVar,password:passwordVar}, function(event){
+			{username:userName, email:emailVar,password:passwordVar, profile: {
+            showarrows: true
+        	}
+    		}, function(event){
 				if(event){
 					Bert.alert(event.reason, 'danger');
 				}else{
@@ -216,7 +233,6 @@ Template.login.events({
 	
 });
 
-
 Template.topNavbar.events({
     'click .logout': function(event){
     	var click = confirm("Do you want to logout?");
@@ -230,6 +246,16 @@ Template.topNavbar.events({
     },
     'click .js-settings':function(event){
     	$('#settings').modal('show');
+    },
+    'click .arrowcheck':function(){
+    	var status = document.getElementById('check');
+    		if(status.checked == true){
+    			Meteor.call('changeArrowsStatus', true);
+    			Session.set('showArrows', true);
+    		}else{
+    			Meteor.call('changeArrowsStatus', false);
+    			Session.set('showArrows', false);
+    		}
 
     },
     'click .js-change-email':function(event){

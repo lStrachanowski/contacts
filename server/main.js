@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 
-Meteor.startup(() => {
+Meteor.startup(() => {/*
 process.env.MAIL_URL = "smtp://postmaster%40sandbox6bc3fa5e9e7547afb9e268a53e4dad65.mailgun.org:a0fe8af8f974f805d5a3ab29daf262e4@smtp.mailgun.org:587";
-});
+*/});
 
 Meteor.publish('allEmails',function(){
   return  Meteor.users.find();
@@ -17,6 +17,15 @@ Meteor.methods({
     let userId = Meteor.userId();
     if ( userId ) {
       return Accounts.sendVerificationEmail( userId );
+    }
+  },
+  'changeArrowsStatus':function(value){
+    if(value == true){
+        Meteor.users.update({_id:Meteor.user()._id},
+        {$set: {'profile.showarrows': true}});
+    }else{
+        Meteor.users.update({_id:Meteor.user()._id},
+        {$set: {'profile.showarrows': false}});
     }
   },
   'changeEmail':function(email){
