@@ -65,6 +65,7 @@ Router.route('/:_id/edit', function(){
 });
 });
 
+
 Template.contactItem.onRendered(function () {
 	if( Meteor.user() ){
 		var cliked = Meteor.user().profile.showarrows;
@@ -94,7 +95,7 @@ Meteor.autorun(function(event){
 				$('.glyphicon-arrow-down').hide();
 				$('.glyphicon-arrow-up').hide();
 			}
-		}
+    }
 });
 
 Meteor.subscribe('allEmails');
