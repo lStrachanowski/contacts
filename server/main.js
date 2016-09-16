@@ -13,6 +13,7 @@ Meteor.publish('allEmails',function(){
   });
 
 Meteor.methods({
+
   sendVerificationLink() {
     let userId = Meteor.userId();
     if ( userId ) {

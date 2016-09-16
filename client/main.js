@@ -65,6 +65,21 @@ Router.route('/:_id/edit', function(){
 });
 });
 
+Template.contactItem.onRendered(function () {
+	if( Meteor.user() ){
+		var cliked = Meteor.user().profile.showarrows;
+		if(cliked == true){
+				$('#check').prop('checked', true);
+				$('.glyphicon-arrow-up').show();
+				$('.glyphicon-arrow-down').show();
+			}else{
+				$('#check').prop('checked', false);
+				$('.glyphicon-arrow-down').hide();
+				$('.glyphicon-arrow-up').hide();
+			}
+		}
+});
+
 Meteor.autorun(function(event){
 	if( Meteor.user() ){
 		var cliked = Meteor.user().profile.showarrows;
@@ -80,7 +95,7 @@ Meteor.autorun(function(event){
 				$('.glyphicon-arrow-up').hide();
 			}
 		}
-	});
+});
 
 Meteor.subscribe('allEmails');
 Meteor.subscribe('contacts');
@@ -118,6 +133,7 @@ Template.contactItem.helpers({
 			}
 
 		}
+
 });
 
 
@@ -136,7 +152,7 @@ Template.contactItem.events({
 			var count = currentRating.rating + 1;
 			Contacts.update({_id:elementId},{$set:{rating:count}});
 		},
-		'click .glyphicon-a rrow-down':function(events){
+		'click .glyphicon-arrow-down':function(events){
 			var elementId = this._id;
 			var currentRating = Contacts.findOne({_id:elementId});
 			var count = currentRating.rating - 1;
