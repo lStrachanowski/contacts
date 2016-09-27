@@ -73,10 +73,12 @@ Template.contactItem.onRendered(function () {
 				$('#check').prop('checked', true);
 				$('.glyphicon-arrow-up').show();
 				$('.glyphicon-arrow-down').show();
+				$('.ratefont').show();
 			}else{
 				$('#check').prop('checked', false);
 				$('.glyphicon-arrow-down').hide();
 				$('.glyphicon-arrow-up').hide();
+				$('.ratefont').hide();
 			}
 		}
 });
@@ -90,10 +92,12 @@ Meteor.autorun(function(event){
 				$('#check').prop('checked', true);
 				$('.glyphicon-arrow-up').show();
 				$('.glyphicon-arrow-down').show();
+				$('.ratefont').show();
 			}else{
 				$('#check').prop('checked', false);
 				$('.glyphicon-arrow-down').hide();
 				$('.glyphicon-arrow-up').hide();
+				$('.ratefont').hide();
 			}
     }
 });
