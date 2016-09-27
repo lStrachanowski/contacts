@@ -43,7 +43,26 @@ Meteor.methods({
   },
   'deleteAccount':function(accountid){
     Meteor.users.remove({_id:accountid});
+  },
+  'changeEmail':function(email, confirm, oldemail){
+    var check = Meteor.user().emails[0].address;
+        if( email === confirm && oldemail===check){
+           Meteor.users.update({_id:Meteor.user()._id},
+           {$set: {'emails.0.address': email}});
+        }else{
+           throw new Meteor.Error(403, "Emails have to match");
+           return false;
+        }
+  },
+  'changePass':function(currentPassword, newPassword, confirmNewPassword){
+        if(newPassword === confirmNewPassword){
+        Accounts.setPassword(Meteor.user()._id, newPassword, {logout: false});
+        }else{
+           throw new Meteor.Error(403, "Check fields , passowrd change failed");
+           return false;
+      }
   }
+
 });
 
 

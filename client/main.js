@@ -283,38 +283,30 @@ Template.topNavbar.events({
     	var email = $('#new-email').val();
     	var confirm = $('#confirm-email').val();
     	var oldemail = $('#old-email').val();
-    	var check = Meteor.user().emails[0].address;
-    		if( email === confirm && oldemail===check){
-    		   Meteor.call('changeEmail',email, function(err){
+    		   Meteor.call('changeEmail',email, confirm, oldemail, function(err){
     		   	if(err){
-    		   		Bert.alert( event.reason, 'danger' );
-    		   	}else{
+    		   		Bert.alert( err.reason, 'danger' );
+    		   	}else{	
     		   		Bert.alert( 'Email changed', 'success' );
     		   	}
-    		   }); 
-    		   $('#new-email').val('');
-    		   $('#confirm-email').val('');
-    		   $('#old-email').val('');
-	    	}else{
-	    		alert("Emails have to match");
-	    	}
-
+    		   	});
+    			$('#new-email').val('');
+           		$('#confirm-email').val('');
+           		$('#old-email').val('');
     },
+
     'click .js-change-pass':function(event){
     	var currentPassword = $('#current-password').val();
     	var newPassword = $('#new-password').val();
     	var confirmNewPassword = $('#confirm-new-password').val();
-    	if(newPassword === confirmNewPassword){
-    		Accounts.changePassword(currentPassword,newPassword , function(err){
-    			if (err){
-    				Bert.alert( event.reason, 'danger' );
+    	Meteor.call('changePass', currentPassword, newPassword, confirmNewPassword, 
+    		function(err){
+    			if(err){
+    				Bert.alert( err.reason, 'danger' );
     			}else{
     				Bert.alert( 'Password changed', 'success' );
     			}
     		});
-    	}else{
-    		Alert('Check password');
-    	}
     	
     }
 
