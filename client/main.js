@@ -421,6 +421,10 @@ Template.adminlog.helpers({
 			return Meteor.users.find({},{sort: {_id:1}});	
 		}else if(Session.get("userTimeSort")){
 			return Meteor.users.find({},{sort: {createdAt :-1}});	
+		}else if(Session.get("adminkey")){
+			var regex = new RegExp(Session.get('adminkey'),'i');
+			console.log(regex);
+			return Meteor.users.find({username:regex});	
 		}
 		else{
 			return Meteor.users.find();
@@ -439,6 +443,9 @@ Template.adminlog.helpers({
 });
 
 Template.adminlog.events({
+	'keyup #adminsearch': function(event) {
+		Session.set('adminkey', event.target.value);
+	},
 	'click .js-delete':function(){
 		var p =  this._id;
 		var click = confirm("Do you want to delete this account ?");
