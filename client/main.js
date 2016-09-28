@@ -225,11 +225,18 @@ Template.contactItemDetails.events({
 		Router.go('/'+this._id+'/edit');
 	},
 	'click #delete':function(event){
-		var click = confirm("Do you really want ot delete this contact ?");
-		if(click == true){
-			Contacts.remove({_id:this._id});
-			Router.go('/');	
-		} 
+		var id = this._id;
+		bootbox.confirm({ 
+		  size: "small",
+		  title: "Delete contact",
+		  message: "Do you really want ot delete this contact ? ", 
+		  callback: function(result){ 
+		  	if(result){
+				Contacts.remove({_id:id});
+				Router.go('/');	
+		  	}
+		  }
+		});
 	}
 });
 
@@ -256,15 +263,22 @@ Template.login.events({
 
 Template.topNavbar.events({
     'click .logout': function(event){
-    	var click = confirm("Do you want to logout?");
-    	if(click == true){
-    	event.preventDefault();
-    	Session.set('key', '');
-        Meteor.logout();
-        Router.go('/');
-        Meteor._reload.reload();
-    	}
+		bootbox.confirm({ 
+		  size: "small",
+		  title: "Logout",
+		  message: "Do you want to logout ? ", 
+		  callback: function(result){ 
+		  	if(result){
+		  		event.preventDefault();
+		    	Session.set('key', '');
+		        Meteor.logout();
+		        Router.go('/');
+		        Meteor._reload.reload();
+		  	}
+		  }
+		});
     },
+
     'click .js-settings':function(event){
     	$('#settings').modal('show');
     },
