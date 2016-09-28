@@ -444,7 +444,11 @@ Template.adminlog.helpers({
 
 Template.adminlog.events({
 	'keyup #adminsearch': function(event) {
+		Session.set("userSort", undefined);
+		Session.set("userIdSort", undefined);
+		Session.set("userTimeSort", undefined);
 		Session.set('adminkey', event.target.value);
+
 	},
 	'click .js-delete':function(){
 		var p =  this._id;
