@@ -41,7 +41,6 @@
   </div>
 </template>
 
-
 <template name="veryfiescreen">
  <div class="centretemplate">
   <br>
@@ -327,7 +326,15 @@
 
 </template>
 
+<template name="contactItemArrowsOff" > 
+<div class="clear"></div>
+  {{#each contactsList}}
+    <div class="contactitem" id="{{_id}}">
+      {{firstname}} {{lastname}} 
+     </div> 
+{{/each}}
 
+</template>
 
 <template name="contactItemDetails" >
       <div class="alignright">

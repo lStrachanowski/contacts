@@ -14,11 +14,15 @@ Router.route('/', function(){
 	this.render('topNavbar', {to:"topnavbar"});
 	this.render('mainContent', {to:"main"});
 	if(Meteor.user()){
-	this.render('contactItem', {to:"contacts"});	
-	}else{
+		var clicked = Meteor.user().profile.showarrows;	
+			if(clicked == true){
+				this.render('contactItem', {to:"contacts"});
+			}else{
+				this.render('contactItemArrowsOff', {to:"contacts"});
+			}
+		}else{
 		this.render(null, {to:"contacts"});
 	}
-	
 });
 
 Router.route('/adminlog', function(){
@@ -65,24 +69,6 @@ Router.route('/:_id/edit', function(){
 });
 });
 
-
-Template.contactItem.onRendered(function () {
-	if( Meteor.user() ){
-		var cliked = Meteor.user().profile.showarrows;
-		if(cliked == true){
-				$('#check').prop('checked', true);
-				$('.glyphicon-arrow-up').show();
-				$('.glyphicon-arrow-down').show();
-				$('.ratefont').show();
-			}else{
-				$('#check').prop('checked', false);
-				$('.glyphicon-arrow-down').hide();
-				$('.glyphicon-arrow-up').hide();
-				$('.ratefont').hide();
-			}
-		}
-});
-
 Meteor.autorun(function(event){
 	if( Meteor.user() ){
 		var cliked = Meteor.user().profile.showarrows;
@@ -90,14 +76,8 @@ Meteor.autorun(function(event){
 		$('body').css('background-image','none');	
 			if(cliked == true){
 				$('#check').prop('checked', true);
-				$('.glyphicon-arrow-up').show();
-				$('.glyphicon-arrow-down').show();
-				$('.ratefont').show();
 			}else{
 				$('#check').prop('checked', false);
-				$('.glyphicon-arrow-down').hide();
-				$('.glyphicon-arrow-up').hide();
-				$('.ratefont').hide();
 			}
     }
 });
@@ -125,7 +105,17 @@ Template.mainContent.events({
 }
 });
 
-
+Template.contactItemArrowsOff.helpers({
+		contactsList:function(){
+			var checkId = Meteor.user()._id;
+			if (!Session.get('key')){
+				return Contacts.find({creatorid:checkId},{sort:{rating:-1}});
+			}else{
+			var regex = new RegExp(Session.get('key'),'i');
+				return Contacts.find({$and:[{ creatorid:checkId }, {$or:[{firstname:regex}, {lastname:regex}]}]});
+			}
+		}
+});
 
 Template.contactItem.helpers({
 		contactsList:function(){
@@ -136,12 +126,18 @@ Template.contactItem.helpers({
 			var regex = new RegExp(Session.get('key'),'i');
 				return Contacts.find({$and:[{ creatorid:checkId }, {$or:[{firstname:regex}, {lastname:regex}]}]});
 			}
-
 		}
-
 });
 
-
+Template.contactItemArrowsOff.events({
+		'click .contactitem': function(events){
+			if(events.target.id == this._id){
+			currentId = this._id;
+			Router.go("/"+this._id);
+			Session.set('key',undefined);
+		}
+	}
+});
 
 Template.contactItem.events({
 		'click .contactitem': function(events){
@@ -286,10 +282,8 @@ Template.topNavbar.events({
     	var status = document.getElementById('check');
     		if(status.checked == true){
     			Meteor.call('changeArrowsStatus', true);
-    			Session.set('showArrows', true);
     		}else{
     			Meteor.call('changeArrowsStatus', false);
-    			Session.set('showArrows', false);
     		}
 
     },
